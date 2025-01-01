@@ -2,7 +2,7 @@ import numpy as np
 import torch
 import torch.nn as nn
 
-import lutgemm
+# import lutgemm
 from quantizers.bcq_quant.bcq_shift import get_shift_and_sign
 
 class LutLinear(nn.Module): 

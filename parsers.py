@@ -176,8 +176,23 @@ def parse_args():
 			action='store_true',
 			help='incoherence processing')
 
+	# quant output
+	parser.add_argument(
+		'--act_quant_int', type=int, default=0, choices=[0, 4, 8],
+		help='quantize activation to int8 or int4'
+	)
+	parser.add_argument(
+		'--act_quant_per_block', 			
+		action='store_true',
+		help='whether to quantize activation per block(8 column)')
+	
+	parser.add_argument(
+		'--act_quant_fp', type=int, default=0, choices=[0, 4, 8],
+		help='quantize activation to fp8 or fp4'
+	)
+
+
 	args = parser.parse_args()
-		
 	if args.acc:
 		args.incoh_processing = True
 		args.act_order = True
