@@ -7,6 +7,6 @@
 #     --benchmark 128
 
 CUDA_VISIBLE_DEVICES=0 python model/opt.py \
-    facebook/opt-125m \
-    --act_quant_int 4 \
-    --benchmark 128
+    facebook/opt-2.7b \
+    --act_quant_int 8 \
+    --load /home/hanrui/projects/yipin/ShiftAddLLM-continue/opt2.7b-w3-lat.pt
