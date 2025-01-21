@@ -438,7 +438,7 @@ if __name__ == '__main__':
 
     if args.act_quant_int !=0 or args.act_quant_fp != 0:
         layers = model.model.decoder.layers
-        make_actQuant(layers, find_layers(layers), act_quant_int=args.act_quant_int, act_quant_fp=args.act_quant_fp, act_quant_per_block=args.act_quant_per_block)
+        make_actQuant(layers, find_layers(layers), act_quant_int=args.act_quant_int, act_quant_fp=args.act_quant_fp, act_quant_fp_exponent = args.act_quant_fp_exponent, act_quant_per_block=args.act_quant_per_block)
 
     print(model)
 
@@ -482,7 +482,8 @@ if __name__ == '__main__':
     if args.save:
         torch.save(model.state_dict(), args.save)
         
-    datasets = ['wikitext2', 'ptb'] 
+    # datasets = ['wikitext2', 'ptb'] 
+    datasets = ['wikitext2']
     if args.new_eval:
         datasets = ['wikitext2', 'ptb-new', 'c4-new']
     for dataset in datasets:

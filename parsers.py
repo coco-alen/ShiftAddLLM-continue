@@ -190,15 +190,18 @@ def parse_args():
 		'--act_quant_fp', type=int, default=0, choices=[0, 4, 8],
 		help='quantize activation to fp8 or fp4'
 	)
-
+	parser.add_argument(
+		'--act_quant_fp_exponent', type=int, default=0,
+		help='exponent bit when quantize activation to fp8 or fp4'
+	)
 
 	args = parser.parse_args()
 	if args.acc:
 		args.incoh_processing = True
 		args.act_order = True
 		args.use_bst = True
-		args.columnwise = True
-		args.block_quant = False
+		args.columnwise = False
+		args.block_quant = True
 	elif args.lat:
 		args.incoh_processing = False
 		args.act_order = True

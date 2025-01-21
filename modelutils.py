@@ -1,11 +1,11 @@
 import torch
 import torch.nn as nn
-
+from lut_gemm.act_quant import LinearWithActQuant
 
 DEV = torch.device('cuda:0')
 
 
-def find_layers(module, layers=[nn.Conv2d, nn.Linear], name=''):
+def find_layers(module, layers=[nn.Conv2d, nn.Linear, LinearWithActQuant], name=''):
     if type(module) in layers:
         return {name: module}
     res = {}
