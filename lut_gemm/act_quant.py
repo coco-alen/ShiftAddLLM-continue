@@ -24,13 +24,16 @@ def make_actQuant(module, names, name='',
     if isinstance(module, LinearWithActQuant):
         return
     for attr in dir(module):
-        tmp = getattr(module, attr)
-        name1 = name + '.' + attr if name != '' else attr
-        if name1 in names:
-            new_module = LinearWithActQuant(tmp.in_features, tmp.out_features, tmp.bias is not None, act_quant_int, act_quant_fp, act_quant_per_block)
-            new_module.weight = tmp.weight
-            if tmp.bias is not None:
-                new_module.bias = tmp.bias
-            setattr(module, attr, new_module)
+        try:
+            tmp = getattr(module, attr)
+            name1 = name + '.' + attr if name != '' else attr
+            if name1 in names:
+                new_module = LinearWithActQuant(tmp.in_features, tmp.out_features, tmp.bias is not None, act_quant_int, act_quant_fp, act_quant_per_block)
+                new_module.weight = tmp.weight
+                if tmp.bias is not None:
+                    new_module.bias = tmp.bias
+                setattr(module, attr, new_module)
+        except:
+            pass
     for name1, child in module.named_children():
         make_actQuant(child, names, name + '.' + name1 if name != '' else name1, act_quant_int, act_quant_fp, act_quant_per_block)

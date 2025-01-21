@@ -197,8 +197,8 @@ def parse_args():
 		args.incoh_processing = True
 		args.act_order = True
 		args.use_bst = True
-		args.columnwise = True
-		args.block_quant = False
+		args.columnwise = False
+		args.block_quant = True
 	elif args.lat:
 		args.incoh_processing = False
 		args.act_order = True

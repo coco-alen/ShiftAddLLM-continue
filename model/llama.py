@@ -16,7 +16,7 @@ from quantizers.quant import *
 from quant_methods.quant_model_bcq import quant_model
 from quantizers.bcq_quant.quantizer import BCQuantizer
 from lut_gemm.kernel import load_shiftaddllm_weight
-
+from lut_gemm.act_quant import make_actQuant
 
 def get_llama(model):
     import torch
@@ -275,6 +275,11 @@ if __name__ == '__main__':
     if args.load:
         model.load_state_dict(torch.load(args.load))
     model.eval()
+
+    if args.act_quant_int !=0 or args.act_quant_fp != 0:
+        layers = model.model.layers
+        make_actQuant(layers, find_layers(layers), act_quant_int=args.act_quant_int, act_quant_fp=args.act_quant_fp, act_quant_per_block=args.act_quant_per_block)
+
     print(model)
 
     if args.load_temp_storage is not None:

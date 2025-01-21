@@ -1,6 +1,8 @@
 CUDA_VISIBLE_DEVICES=0 python model/llama.py \
-    meta-llama/Llama-2-13b-hf \
+    meta-llama/Llama-2-7b-hf \
     --wbits 3 \
     --groupsize 128 \
     --acc \
-    --bcq_round 50 # bcq_round 20 works too, bigger - slower - maybe better
+    --bcq_round 50 \
+    --act_quant_int 4 \
+    --act_quant_per_block
